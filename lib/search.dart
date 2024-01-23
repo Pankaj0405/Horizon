@@ -96,6 +96,8 @@ class _SearchState extends State<Search> {
             ),
             const SizedBox(height: 30),
             const SearchHistory(),
+            const SizedBox(height: 30),
+            const SearchSugestion(),
           ],
         ),
       ),
@@ -136,14 +138,16 @@ class SearchHistory extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left:8.0, bottom: 10),
+            padding: const EdgeInsets.only(left: 8.0, bottom: 10),
             child: SizedBox(
               height: 100.0, // Set the height of the grid as needed
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3, // Set the number of columns in the grid
-                  crossAxisSpacing: 15, // Set the horizontal spacing between items
-                  mainAxisSpacing: 8.0, // Set the vertical spacing between items
+                  crossAxisSpacing:
+                      15, // Set the horizontal spacing between items
+                  mainAxisSpacing:
+                      8.0, // Set the vertical spacing between items
                   childAspectRatio: 4,
                 ),
                 itemCount: searchHistory.length,
@@ -158,8 +162,78 @@ class SearchHistory extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        iconSize: MaterialStatePropertyAll(5)),
+                        iconSize: const MaterialStatePropertyAll(5)),
                     child: Text(searchHistory[index]),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SearchSugestion extends StatelessWidget {
+  const SearchSugestion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Replace the items in the list with your actual search history
+    List<String> searchSuggestion = [
+      'Query 1',
+      'Query 2',
+      'Query 3',
+      'Query 4',
+      'Query 5'
+    ];
+
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(
+              left: 8.0,
+              right: 8.0,
+            ),
+            child: Text(
+              'Trending Search',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, bottom: 10),
+            child: SizedBox(
+              height: 100.0, // Set the height of the grid as needed
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, // Set the number of columns in the grid
+                  crossAxisSpacing:
+                      15, // Set the horizontal spacing between items
+                  mainAxisSpacing:
+                      8.0, // Set the vertical spacing between items
+                  childAspectRatio: 4,
+                ),
+                itemCount: searchSuggestion.length,
+                itemBuilder: (context, index) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      // Handle tapping on a search history item
+                    },
+                    style: ButtonStyle(
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        iconSize: const MaterialStatePropertyAll(5)),
+                    child: Text(searchSuggestion[index]),
                   );
                 },
               ),
