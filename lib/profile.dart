@@ -216,7 +216,7 @@ class StackExample extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Row(
@@ -224,24 +224,24 @@ class StackExample extends StatelessWidget {
                         Container(
                           height: 40,
                           width: 40,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.green,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 7,
                         ),
-                        Text(
+                        const Text(
                           "nickname",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 6,
                     ),
-                    Text(
+                    const Text(
                       "Welcome to Seaventure! Discover amazing sea-related tours events, and volunteering opportunities.",
                     ),
                   ],
