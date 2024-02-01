@@ -1,9 +1,13 @@
-import 'package:first_app/add.dart';
+import 'package:first_app/camera/phone_camera.dart';
 import 'package:first_app/home.dart';
-import 'package:first_app/notification.dart';
+import 'package:first_app/volunteer.dart';
 import 'package:first_app/profile.dart';
 import 'package:first_app/search.dart';
 import 'package:flutter/material.dart';
+// import 'package:camera/camera.dart';
+
+// late List<CameraDescription> cameras;
+// late CameraController controller;
 
 void main() {
   runApp(const MyApp());
@@ -11,6 +15,8 @@ void main() {
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -26,12 +32,12 @@ class _MyAppState extends State<MyApp> {
   }
 
 // ignore: unused_element
-  final List _pages = const[
-    Home(),
-    Search(),
-    Add(),
-    NotificationPage(),
-    Profile(),
+  final List _pages =  [
+    const Home(),
+    const Search(),
+     const CameraPage(),
+    const VolunteerPage(),
+    const Profile(),
   ];
 
   @override
@@ -42,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         body: _pages[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
+          showSelectedLabels: true,
           showUnselectedLabels: false,
           currentIndex: _selectedIndex,
           onTap: _navigateBottomeBar,
@@ -61,17 +67,15 @@ class _MyAppState extends State<MyApp> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.add_circle,
-                
-                grade: 70,
+                Icons.photo_camera_outlined,
               ),
-              label: "add",
+              label: "camera",
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.message,
+                Icons.volunteer_activism_outlined,
               ),
-              label: "message", 
+              label: "volunteer",
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -82,9 +86,7 @@ class _MyAppState extends State<MyApp> {
           ],
           iconSize: 25,
           elevation: 50,
-          
         ),
-        
       ),
     );
   }
