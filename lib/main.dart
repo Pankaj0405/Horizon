@@ -1,9 +1,9 @@
-import 'package:first_app/add.dart';
-import 'package:first_app/home.dart';
-import 'package:first_app/notification.dart';
-import 'package:first_app/profile.dart';
-import 'package:first_app/search.dart';
 import 'package:flutter/material.dart';
+import './add.dart';
+import './home.dart';
+import './notification.dart';
+import './profile.dart';
+import './search.dart';
 
 void main() {
   runApp(const MyApp());
@@ -89,93 +89,93 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget buildBigCard(String inputText1, String inputText2) => Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            height: 190,
-            width: 400,
-            color: Colors.purple.shade300,
-          ),
-          Container(
-            height: 100,
-            width: 400,
-            decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(15)),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                inputText1,
-                style: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 50,
-            width: 400,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 9.0),
-              child: Text(
-                inputText2,
-                style: const TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          )
-        ],
-      );
-
-  Widget buildSmallCard(String inputText1, String inputText2) => Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            height: 190,
-            width: 200,
-            decoration: BoxDecoration(
-                color: Colors.pink.shade300,
-                borderRadius: BorderRadius.circular(25)),
-          ),
-          Container(
-            height: 100,
-            width: 200,
-            decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(15)),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                inputText1,
-                style: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 50,
-            width: 200,
-            decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(25)),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 9.0),
-              child: Text(
-                inputText2,
-                style: const TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          )
-        ],
-      );
+  // Widget buildBigCard(String inputText1, String inputText2) => Stack(
+  //       alignment: Alignment.bottomCenter,
+  //       children: [
+  //         Container(
+  //           height: 190,
+  //           width: 400,
+  //           color: Colors.purple.shade300,
+  //         ),
+  //         Container(
+  //           height: 100,
+  //           width: 400,
+  //           decoration: BoxDecoration(
+  //               color: Colors.grey.shade300,
+  //               borderRadius: BorderRadius.circular(15)),
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: Text(
+  //               inputText1,
+  //               style: const TextStyle(
+  //                 fontSize: 25,
+  //                 fontWeight: FontWeight.bold,
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //         Container(
+  //           height: 50,
+  //           width: 400,
+  //           decoration: BoxDecoration(
+  //             color: Colors.grey.shade300,
+  //           ),
+  //           child: Padding(
+  //             padding: const EdgeInsets.only(left: 9.0),
+  //             child: Text(
+  //               inputText2,
+  //               style: const TextStyle(
+  //                 fontSize: 18,
+  //               ),
+  //             ),
+  //           ),
+  //         )
+  //       ],
+  //     );
+  //
+  // Widget buildSmallCard(String inputText1, String inputText2) => Stack(
+  //       alignment: Alignment.bottomCenter,
+  //       children: [
+  //         Container(
+  //           height: 190,
+  //           width: 200,
+  //           decoration: BoxDecoration(
+  //               color: Colors.pink.shade300,
+  //               borderRadius: BorderRadius.circular(25)),
+  //         ),
+  //         Container(
+  //           height: 100,
+  //           width: 200,
+  //           decoration: BoxDecoration(
+  //               color: Colors.grey.shade300,
+  //               borderRadius: BorderRadius.circular(15)),
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: Text(
+  //               inputText1,
+  //               style: const TextStyle(
+  //                 fontSize: 25,
+  //                 fontWeight: FontWeight.bold,
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //         Container(
+  //           height: 50,
+  //           width: 200,
+  //           decoration: BoxDecoration(
+  //               color: Colors.grey.shade300,
+  //               borderRadius: BorderRadius.circular(25)),
+  //           child: Padding(
+  //             padding: const EdgeInsets.only(left: 9.0),
+  //             child: Text(
+  //               inputText2,
+  //               style: const TextStyle(
+  //                 fontSize: 18,
+  //               ),
+  //             ),
+  //           ),
+  //         )
+  //       ],
+  //     );
 }

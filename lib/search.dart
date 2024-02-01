@@ -1,6 +1,6 @@
-import 'package:first_app/destination_details.dart';
-import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
+import './destination_details.dart';
+import './main.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
