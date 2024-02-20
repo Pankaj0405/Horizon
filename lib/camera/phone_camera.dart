@@ -21,14 +21,13 @@ class _CameraPageState extends State<CameraPage> {
     } else {}
   }
 
+  int direction = 0;
   late List<CameraDescription> cameras;
   late CameraController cameraController;
 
-  int direction = 0;
-
   @override
   void initState() {
-    startCamera(0);
+     startCamera(0);
     super.initState();
   }
 
@@ -110,7 +109,7 @@ class _CameraPageState extends State<CameraPage> {
     return Align(
       alignment: alignment,
       child: Container(
-        margin: const EdgeInsets.only(left: 20, bottom: 20, right: 20),
+        margin: const EdgeInsets.only(top: 20,left: 20, bottom: 20, right: 20),
         height: 50,
         width: 50,
         decoration: const BoxDecoration(

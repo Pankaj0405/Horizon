@@ -1,29 +1,26 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import './add.dart';
+import './firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
 import './home.dart';
-import './notification.dart';
 import './profile.dart';
 import './search.dart';
 import './camera/phone_camera.dart';
-import './home.dart';
 import './volunteer.dart';
-import './profile.dart';
-import './search.dart';
-import 'package:flutter/material.dart';
 // import 'package:camera/camera.dart';
 
 // late List<CameraDescription> cameras;
 // late CameraController controller;
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
-  
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -41,14 +38,14 @@ class _MyAppState extends State<MyApp> {
   final List _pages =  [
     const Home(),
     const Search(),
-     const CameraPage(),
+    const CameraPage(),
     const VolunteerPage(),
     const Profile(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: _pages[_selectedIndex],
@@ -63,31 +60,31 @@ class _MyAppState extends State<MyApp> {
               icon: Icon(
                 Icons.home,
               ),
-              label: "home",
+              label: "Home",
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.search,
+                Icons.event,
               ),
-              label: "search",
+              label: "Events & Tours",
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.photo_camera_outlined,
               ),
-              label: "camera",
+              label: "Camera",
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.volunteer_activism_outlined,
               ),
-              label: "volunteer",
+              label: "Volunteers",
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_circle,
               ),
-              label: "profile",
+              label: "Profile",
             ),
           ],
           iconSize: 25,

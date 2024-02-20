@@ -11,8 +11,10 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: StackExample(),
+    return SafeArea(
+      child: const Scaffold(
+        body: StackExample(),
+      ),
     );
   }
 }
@@ -46,15 +48,19 @@ class StackExample extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 left: 0,
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  alignment: Alignment.bottomCenter,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.red,
-                  ),
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage("assets/images/profile.jpeg"),
                 ),
+                // Container(
+                //   width: 100,
+                //   height: 100,
+                //   alignment: Alignment.bottomCenter,
+                //   decoration: const BoxDecoration(
+                //     shape: BoxShape.circle,
+                //     color: Colors.red,
+                //   ),
+                // ),
               ),
             ],
           ),
