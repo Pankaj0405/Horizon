@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './edit_profile.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -255,6 +256,7 @@ class StackExample extends StatelessWidget {
               ),
             ),
           ),
+          Rating(),
         ],
       ),
     );
@@ -276,4 +278,68 @@ Widget hobbyCard() {
       ),
     ),
   );
+}
+
+//------------------rating----------
+
+class Rating extends StatelessWidget {
+  const Rating({super.key});
+  final double cutomRating = 2.7;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(20),
+      child: Container(
+        width: double.maxFinite,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.grey.shade200,
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0),
+                child: Text(
+                  "Contribution",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              SizedBox(height: 5),
+              RatingBar.builder(
+                initialRating: cutomRating,
+                minRating: 0,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                maxRating: 5,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                ignoreGestures: true,
+                itemSize: 20,
+                onRatingUpdate: (value) {},
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0),
+                child: Text(
+                  "discription......\ndiscription......\ndiscription......\ndiscription......",
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
