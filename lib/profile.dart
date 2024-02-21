@@ -41,7 +41,10 @@ class StackExample extends StatelessWidget {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green,
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/tour1.jpeg"),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               // Circular widget in the middle
@@ -69,28 +72,28 @@ class StackExample extends StatelessWidget {
             height: 10,
           ),
           const Text(
-            "Profile name",
+            "Alice Page",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const Text("@nickname"),
+          const Text("@alicep43"),
           const SizedBox(
             height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              hobbyCard(),
+              hobbyCard("Music"),
               const SizedBox(
                 width: 10,
               ),
-              hobbyCard(),
+              hobbyCard("Swimming"),
               const SizedBox(
                 width: 10,
               ),
-              hobbyCard(),
+              hobbyCard("Reading"),
             ],
           ),
           const SizedBox(
@@ -145,7 +148,7 @@ class StackExample extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "0",
+                      "5",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -159,7 +162,7 @@ class StackExample extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "0",
+                      "428",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -173,7 +176,7 @@ class StackExample extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "0",
+                      "219",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -233,14 +236,17 @@ class StackExample extends StatelessWidget {
                           width: 40,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.green,
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/profile.jpeg"),
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
                         const SizedBox(
                           width: 7,
                         ),
                         const Text(
-                          "nickname",
+                          "@alicep43",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -256,25 +262,25 @@ class StackExample extends StatelessWidget {
               ),
             ),
           ),
-          Rating(),
+          const Rating(),
         ],
       ),
     );
   }
 }
 
-Widget hobbyCard() {
+Widget hobbyCard(hobyName) {
   return Container(
     height: 25,
     decoration: BoxDecoration(
       color: Colors.grey.shade200,
       borderRadius: BorderRadius.circular(25),
     ),
-    child: const Padding(
+    child: Padding(
       padding: EdgeInsets.only(left: 10, right: 10),
       child: Text(
-        "hobby",
-        style: TextStyle(fontSize: 16),
+        hobyName,
+        style: const TextStyle(fontSize: 16),
       ),
     ),
   );
@@ -288,7 +294,7 @@ class Rating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Container(
         width: double.maxFinite,
         decoration: BoxDecoration(
@@ -296,18 +302,18 @@ class Rating extends StatelessWidget {
           color: Colors.grey.shade200,
         ),
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
+              const Padding(
+                padding: EdgeInsets.only(left: 5.0),
                 child: Text(
                   "Contribution",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               RatingBar.builder(
                 initialRating: cutomRating,
                 minRating: 0,
@@ -315,8 +321,8 @@ class Rating extends StatelessWidget {
                 allowHalfRating: true,
                 maxRating: 5,
                 itemCount: 5,
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                itemBuilder: (context, _) => Icon(
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(
                   Icons.star,
                   color: Colors.amber,
                 ),
@@ -324,9 +330,9 @@ class Rating extends StatelessWidget {
                 itemSize: 20,
                 onRatingUpdate: (value) {},
               ),
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
+              const SizedBox(height: 10),
+              const Padding(
+                padding: EdgeInsets.only(left: 5.0),
                 child: Text(
                   "discription......\ndiscription......\ndiscription......\ndiscription......",
                   style: TextStyle(

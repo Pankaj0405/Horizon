@@ -88,9 +88,10 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                top: 30,
-                                right: 8,
-                                left: 08,
+                                top: 15,
+                                right: 10,
+                                left: 10,
+                                bottom: 10,
                               ),
                               child: Image.network(
                                 tours
@@ -105,7 +106,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                               // mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
                                 SizedBox(
                                   width: 150,
@@ -150,28 +151,30 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                 //   ),
                                 // ),
                                 ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.purple,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.purple,
+                                  ),
+                                  onPressed: () {
+                                    Get.to(() => ToursScreen(
+                                        tourName: tours.eventName,
+                                        address: tours.address,
+                                        imagePath: tours.imagePath,
+                                        orgName: tours.organizationName,
+                                        desc: tours.description,
+                                        price: tours.price,
+                                        id: tours.id));
+                                  },
+                                  child: const Text(
+                                    'Details',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      overflow: TextOverflow.ellipsis,
+                                      color: Colors.white,
                                     ),
-                                    onPressed: () {
-                                      Get.to(() => ToursScreen(
-                                          tourName: tours.eventName,
-                                          address: tours.address,
-                                          imagePath: tours.imagePath,
-                                          orgName: tours.organizationName,
-                                          desc: tours.description,
-                                          price: tours.price,
-                                          id: tours.id));
-                                    },
-                                    child: const Text(
-                                      'Details',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                        overflow: TextOverflow.ellipsis,
-                                        color: Colors.white,
-                                      ),
-                                    )),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
                               ],
                             ),
                           ],
@@ -196,9 +199,10 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                top: 30,
-                                right: 8,
-                                left: 08,
+                                top: 15,
+                                right: 15,
+                                left: 10,
+                                bottom: 10,
                               ),
                               child: Image.network(
                                 events
@@ -213,7 +217,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                               // mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
                                 SizedBox(
                                   width: 150,
@@ -258,28 +262,30 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                 //   ),
                                 // ),
                                 ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.purple,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.purple,
+                                  ),
+                                  onPressed: () {
+                                    Get.to(() => EventsScreen(
+                                        eventName: events.eventName,
+                                        address: events.address,
+                                        imagePath: events.imagePath,
+                                        orgName: events.organizationName,
+                                        desc: events.description,
+                                        price: events.price,
+                                        id: events.id));
+                                  },
+                                  child: const Text(
+                                    'Details',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      overflow: TextOverflow.ellipsis,
+                                      color: Colors.white,
                                     ),
-                                    onPressed: () {
-                                      Get.to(() => EventsScreen(
-                                          eventName: events.eventName,
-                                          address: events.address,
-                                          imagePath: events.imagePath,
-                                          orgName: events.organizationName,
-                                          desc: events.description,
-                                          price: events.price,
-                                          id: events.id));
-                                    },
-                                    child: const Text(
-                                      'Details',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                        overflow: TextOverflow.ellipsis,
-                                        color: Colors.white,
-                                      ),
-                                    )),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
                               ],
                             ),
                           ],
