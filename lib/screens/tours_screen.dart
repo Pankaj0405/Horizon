@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:horizon/controller/homepage_controller.dart';
 
+// ignore: must_be_immutable
 class ToursScreen extends StatefulWidget {
   String tourName;
   String imagePath;
@@ -27,7 +28,7 @@ class ToursScreen extends StatefulWidget {
 class _ToursScreenState extends State<ToursScreen> {
   final _authController = Get.put(AuthController());
 
-  var textStyle = TextStyle(
+  var textStyle = const TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w500,
     color: Colors.black,
@@ -42,15 +43,15 @@ Future<void> _openDialogBox() async {
       builder: (BuildContext context) {
       return AlertDialog(
         title: Text('Bookings', style: textStyle,),
-        content: Text('Are you sure to book?', style: TextStyle(fontSize: 20),),
+        content: const Text('Are you sure to book?', style: TextStyle(fontSize: 20),),
         actions: [
             ElevatedButton(onPressed: () {
               Get.back();
-            }, child: Text('Cancel')),
+            }, child: const Text('Cancel')),
             ElevatedButton(onPressed: () {
               _authController.tourBookings(widget.id);
               Get.back();
-            }, child: Text('Book')),
+            }, child: const Text('Book')),
           ],
       );
   });
@@ -61,7 +62,7 @@ Future<void> _openDialogBox() async {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: Text(widget.tourName, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),),
+        title: Text(widget.tourName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),),
         centerTitle: true,
       ),
       body: Center(
@@ -78,13 +79,13 @@ Future<void> _openDialogBox() async {
                 fit: BoxFit.cover,
               ),
             ),
-            Divider(
+            const Divider(
               height: 30,
               thickness: 2,
               indent: 20,
               endIndent: 20,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 30,
@@ -162,13 +163,13 @@ Future<void> _openDialogBox() async {
             //     color: Colors.black, // Customize text color
             //   ),
             // ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
               _openDialogBox();
                 // Button action
               },
-              child: Text('Book'),
+              child: const Text('Book'),
             ),
           ],
         ),

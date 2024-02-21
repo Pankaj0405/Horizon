@@ -35,7 +35,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
       child: Scaffold(
         appBar: AppBar(
           // toolbarHeight: 120,
-          title: Text(
+          title: const Text(
             "Tours and Events",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
@@ -163,9 +163,9 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                           price: tours.price,
                                           id: tours.id));
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       'Details',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
                                         overflow: TextOverflow.ellipsis,
@@ -271,9 +271,9 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                           price: events.price,
                                           id: events.id));
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       'Details',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
                                         overflow: TextOverflow.ellipsis,

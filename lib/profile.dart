@@ -11,8 +11,8 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: const Scaffold(
+    return const SafeArea(
+      child: Scaffold(
         body: StackExample(),
       ),
     );
@@ -44,7 +44,7 @@ class StackExample extends StatelessWidget {
                 ),
               ),
               // Circular widget in the middle
-              Positioned(
+              const Positioned(
                 bottom: 0,
                 right: 0,
                 left: 0,

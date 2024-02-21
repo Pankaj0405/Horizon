@@ -34,7 +34,7 @@ class _VolunteerPageState extends State<VolunteerPage> with TickerProviderStateM
       child: Scaffold(
         appBar: AppBar(
           // toolbarHeight: 120,
-          title: Text(
+          title: const Text(
             "Volunteers",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
@@ -78,7 +78,7 @@ class _VolunteerPageState extends State<VolunteerPage> with TickerProviderStateM
                     final volunteers = _authController.volunteerData[index];
                     return volunteers.type == "Tour"
                         ? Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Card(
                         color: const Color.fromARGB(255, 7, 159, 159)
                             .withOpacity(0.6),
