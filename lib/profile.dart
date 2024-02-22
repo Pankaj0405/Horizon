@@ -41,7 +41,7 @@ class StackExample extends StatelessWidget {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     image: AssetImage("assets/images/tour1.jpeg"),
                     fit: BoxFit.fill,
                   ),
@@ -277,7 +277,7 @@ Widget hobbyCard(hobyName) {
       borderRadius: BorderRadius.circular(25),
     ),
     child: Padding(
-      padding: EdgeInsets.only(left: 10, right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       child: Text(
         hobyName,
         style: const TextStyle(fontSize: 16),

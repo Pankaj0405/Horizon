@@ -683,11 +683,36 @@ class MostPopularMarine extends StatefulWidget {
 class _MostPopularMarineState extends State<MostPopularMarine> {
   List upcomingEventsCards = [
     // color will be replaced by images
-    ["Hatchling hustle", "watching sea turtles going on their journey", true, "assets/images/tour3.jpeg"],
-    ["Scubadiving", "Explore the sea and it's creatures", false, "assets/images/tour5.jpg"],
-    ["Beach wedding", "A wedding wave is going to strike the beach", true, "assets/images/event2.jpeg"],
-    ["Scubasauras", "The jurrasic for scuba divers", true, "assets/images/tour5.jpg"],
-     ["Beach sand party", "it's can't be rock because it's a beach with sand", true, "assets/images/event5.jpg"],
+    [
+      "Hatchling hustle",
+      "watching sea turtles going on their journey",
+      true,
+      "assets/images/tour3.jpeg"
+    ],
+    [
+      "Scubadiving",
+      "Explore the sea and it's creatures",
+      false,
+      "assets/images/tour5.jpg"
+    ],
+    [
+      "Beach wedding",
+      "A wedding wave is going to strike the beach",
+      true,
+      "assets/images/event2.jpeg"
+    ],
+    [
+      "Scubasauras",
+      "The jurrasic for scuba divers",
+      true,
+      "assets/images/tour5.jpg"
+    ],
+    [
+      "Beach sand party",
+      "it's can't be rock because it's a beach with sand",
+      true,
+      "assets/images/event5.jpg"
+    ],
   ];
 
   @override
@@ -717,7 +742,7 @@ class _MostPopularMarineState extends State<MostPopularMarine> {
                   child: Container(
                     width: 400,
                     decoration: BoxDecoration(
-                      image:  DecorationImage(
+                      image: DecorationImage(
                         image: AssetImage(item[3]),
                         fit: BoxFit.fill,
                       ),
@@ -891,11 +916,36 @@ class PopularTours extends StatefulWidget {
 class _PopularToursState extends State<PopularTours> {
   List upcomingEventsCards = [
     // color will be replaced by images
-    ["The silent sea", "Perfect for embrassing the nature", true, "assets/images/tour1.jpeg"],
-    ["The swim beach", "If you like swimming in ocean and watch the aquatics, this is the place", false, "assets/images/tour2.jpg"],
-    ["Galgibaga", "Perfect for watching the new journey of hatchligs", true, "assets/images/tour3.jpeg"],
-    ["The blue lagoon", "If you want to see the real untouchd beauty of nature", false, "assets/images/tour4.jpg"],
-    ["Scubasauras", "The jurrasic for scuba divers", true, "assets/images/tour5.jpg"],
+    [
+      "The silent sea",
+      "Perfect for embrassing the nature",
+      true,
+      "assets/images/tour1.jpeg"
+    ],
+    [
+      "The swim beach",
+      "If you like swimming in ocean and watch the aquatics, this is the place",
+      false,
+      "assets/images/tour2.jpg"
+    ],
+    [
+      "Galgibaga",
+      "Perfect for watching the new journey of hatchligs",
+      true,
+      "assets/images/tour3.jpeg"
+    ],
+    [
+      "The blue lagoon",
+      "If you want to see the real untouchd beauty of nature",
+      false,
+      "assets/images/tour4.jpg"
+    ],
+    [
+      "Scubasauras",
+      "The jurrasic for scuba divers",
+      true,
+      "assets/images/tour5.jpg"
+    ],
   ];
 
   @override
@@ -995,11 +1045,36 @@ class PopularEvents extends StatefulWidget {
 class _PopularEventsState extends State<PopularEvents> {
   List upcomingEventsCards = [
     // color will be replaced by images
-    ["The Fire Night", "enjoy a night in the city but differently", true, "assets/images/event1.jpg"],
-    ["Beach wedding", "A wedding wave is going to strike the beach", false, "assets/images/event2.jpeg"],
-    ["The beach get together", "meet new people and discuss about, well it's up to you", true, "assets/images/event3.jpeg"],
-    ["Hatchling festival", "see the turtles emerging from the earth", false, "assets/images/event4.jpeg"],
-    ["Beach sand party", "it's can't be rock because it's a beach with sand", true, "assets/images/event5.jpg"],
+    [
+      "The Fire Night",
+      "enjoy a night in the city but differently",
+      true,
+      "assets/images/event1.jpg"
+    ],
+    [
+      "Beach wedding",
+      "A wedding wave is going to strike the beach",
+      false,
+      "assets/images/event2.jpeg"
+    ],
+    [
+      "The beach get together",
+      "meet new people and discuss about, well it's up to you",
+      true,
+      "assets/images/event3.jpeg"
+    ],
+    [
+      "Hatchling festival",
+      "see the turtles emerging from the earth",
+      false,
+      "assets/images/event4.jpeg"
+    ],
+    [
+      "Beach sand party",
+      "it's can't be rock because it's a beach with sand",
+      true,
+      "assets/images/event5.jpg"
+    ],
   ];
 
   @override
