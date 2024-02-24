@@ -49,7 +49,7 @@ class _MyAppState extends State<Home> {
             horizontal: 10,
           ),
           child: ListView(
-            children: const [
+            children: [
               // ----------------------------Top part -----------------
               // Container(
               //   // height: 100,
@@ -99,11 +99,22 @@ class _MyAppState extends State<Home> {
               // ),
 
               // ----------------------contribution-----------------------------
-              
 
               // ------------------------------search bar--------------------------------
 
-              
+              Container(
+                height: 200,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "assets/images/tour1.jpeg",
+                    ),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+
               SizedBox(
                 height: 10,
               ),
