@@ -49,7 +49,7 @@ class _MyAppState extends State<Home> {
             horizontal: 10,
           ),
           child: ListView(
-            children: [
+            children: const [
               // ----------------------------Top part -----------------
               // Container(
               //   // height: 100,
@@ -99,109 +99,12 @@ class _MyAppState extends State<Home> {
               // ),
 
               // ----------------------contribution-----------------------------
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  // left: 15,
-                  // right: 15,
-                ),
-                child: Container(
-                  // height: 150,
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(25),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 20,
-                      horizontal: 20,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "You've contributed to Marine",
-                          style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Text(
-                          "75% of your weekly goal is completed",
-                          style: TextStyle(
-                            fontSize: 17,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        LinearProgressIndicator(
-                          value: 0.75,
-                          minHeight: 10,
-                          backgroundColor: Colors.white,
-                          color: Colors.green.shade400,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(25),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              
 
               // ------------------------------search bar--------------------------------
 
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 20,
-                ),
-                child: SearchAnchor(
-                  isFullScreen: false,
-                  viewConstraints: const BoxConstraints(
-                    maxHeight: 200,
-                  ),
-                  builder: (BuildContext context, SearchController controller) {
-                    return SearchBar(
-                      controller: controller,
-                      padding: const MaterialStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.symmetric(horizontal: 16.0)),
-                      onTap: () {
-                        controller.openView();
-                      },
-                      onChanged: (_) {
-                        controller.openView();
-                      },
-                      leading: const Icon(Icons.search),
-                      hintText: "Search for marine activities",
-                    );
-                  },
-                  suggestionsBuilder:
-                      (BuildContext context, SearchController controller) {
-                    return List<ListTile>.generate(
-                      5,
-                      (int index) {
-                        final String item = 'item $index';
-                        return ListTile(
-                          title: Text(item),
-                          onTap: () {
-                            setState(
-                              () {
-                                controller.closeView(item);
-                              },
-                            );
-                          },
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(
+              
+              SizedBox(
                 height: 10,
               ),
 
@@ -223,7 +126,7 @@ class _MyAppState extends State<Home> {
               //     ),
               //   ],
               // ),
-              const SizedBox(height: 35),
+              SizedBox(height: 35),
 
               // SizedBox(
               //   height: 220,
@@ -559,15 +462,15 @@ class _MyAppState extends State<Home> {
               //     ),
               //   ),
               // ),
-              const MostPopularMarine(),
-              const SizedBox(height: 35),
-              const QuickMarineWorkout(),
-              const SizedBox(height: 35),
-              const PopularTours(),
-              const SizedBox(height: 35),
-              const PopularEvents(),
-              const SizedBox(height: 35),
-              const PopularVolunteer(),
+              MostPopularMarine(),
+              SizedBox(height: 35),
+              QuickMarineWorkout(),
+              SizedBox(height: 35),
+              PopularTours(),
+              SizedBox(height: 35),
+              PopularEvents(),
+              SizedBox(height: 35),
+              PopularVolunteer(),
             ],
           ),
         ),

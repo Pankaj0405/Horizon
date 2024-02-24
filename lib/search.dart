@@ -1,7 +1,12 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:horizon/card_discriptions/event_details.dart';
 import './controller/homepage_controller.dart';
+// ignore: unused_import
 import './screens/tours_screen.dart';
+// ignore: unused_import
 import './screens/events_screen.dart';
 
 class Search extends StatefulWidget {
@@ -26,6 +31,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
     _tabController.dispose();
     super.dispose();
   }
+
+  final List tourData = [];
 
   @override
   Widget build(BuildContext context) {
@@ -80,104 +87,103 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                     final tours = _authController.tourData[index];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        color: const Color.fromARGB(255, 7, 159, 159)
-                            .withOpacity(0.8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 15,
-                                right: 10,
-                                left: 10,
-                                bottom: 10,
-                              ),
-                              child: Image.network(
-                                tours
-                                    .imagePath, // Replace 'image.png' with your image asset path
-                                width: 150,
-                                height: 150,
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(
+                            () => EventScreen(
+                              maxSlots: "5",
+                              address: "Goa",
+                              eventName: "Turtle",
+                              toDate: "2024-02-27",
+                              fromDate: "2024-02-21",
+                              orgName: "Karen",
+                              price: "1200",
+                              desc: "enjoy seeing the turtle",
+                              imagePath: "assets/images/sc1.jpeg",
+                              endTime: "10:15 PM",
+                              startTime: "3:15 AM",
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: double.maxFinite,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                image: NetworkImage("assets/images/tour1.jpeg"),
                                 fit: BoxFit.fill,
+                                opacity: 0.6,
+                              ),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 2,
+                                    ),
+                                    child: Text(
+                                      "Turtle",
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 2,
+                                    ),
+                                    child: Text(
+                                      '${"5"}, ${"Goa"}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.symmetric(
+                                  //     horizontal: 10,
+                                  //     vertical: 2,
+                                  //   ),
+                                  //   child: Text(
+                                  //     'Max-Slots: ${tours.maxSlots}',
+                                  //     style: const TextStyle(
+                                  //       fontSize: 14,
+                                  //       fontWeight: FontWeight.bold,
+                                  //       color: Colors.white,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      "Enjoy watching the turtles",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(
-                                  width: 150,
-                                  child: Text(
-                                    tours.eventName,
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.bold,
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 8.0),
-                                SizedBox(
-                                  width: 150,
-                                  child: Text(
-                                    'Organized By: \n${tours.organizationName}',
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 8.0),
-                                // SizedBox(
-                                //   height: 80,
-                                //   width: 150,
-                                //   child: Text(
-                                //     tours.description,
-                                //     maxLines: 2,
-                                //     style: const TextStyle(
-                                //       fontSize: 18,
-                                //       overflow: TextOverflow.ellipsis,
-                                //       fontWeight: FontWeight.w300,
-                                //       color: Colors.white,
-                                //     ),
-                                //   ),
-                                // ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.purple,
-                                  ),
-                                  onPressed: () {
-                                    Get.to(() => ToursScreen(
-                                        tourName: tours.eventName,
-                                        address: tours.address,
-                                        imagePath: tours.imagePath,
-                                        orgName: tours.organizationName,
-                                        desc: tours.description,
-                                        price: tours.price,
-                                        id: tours.id));
-                                  },
-                                  child: const Text(
-                                    'Details',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                              ],
-                            ),
-                          ],
+                          ),
                         ),
                       ),
                     );
@@ -191,122 +197,103 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                     final events = _authController.eventData[index];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        color: const Color.fromARGB(255, 7, 159, 159)
-                            .withOpacity(0.8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 15,
-                                right: 15,
-                                left: 10,
-                                bottom: 10,
-                              ),
-                              child: Image.network(
-                                events
-                                    .imagePath, // Replace 'image.png' with your image asset path
-                                width: 150,
-                                height: 150,
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(
+                            () => EventScreen(
+                              maxSlots: "5",
+                              address: "Goa",
+                              eventName: "Turtle",
+                              toDate: "2024-02-27",
+                              fromDate: "2024-02-21",
+                              orgName: "Karen",
+                              price: "1200",
+                              desc: "enjoy seeing the turtle",
+                              imagePath: "assets/images/sc1.jpeg",
+                              endTime: "10:15 PM",
+                              startTime: "3:15 AM",
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: double.maxFinite,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                image: NetworkImage("assets/images/tour1.jpeg"),
                                 fit: BoxFit.fill,
+                                opacity: 0.6,
+                              ),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 2,
+                                    ),
+                                    child: Text(
+                                      "Turtle",
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 2,
+                                    ),
+                                    child: Text(
+                                      '${"5"}, ${"Goa"}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.symmetric(
+                                  //     horizontal: 10,
+                                  //     vertical: 2,
+                                  //   ),
+                                  //   child: Text(
+                                  //     'Max-Slots: ${tours.maxSlots}',
+                                  //     style: const TextStyle(
+                                  //       fontSize: 14,
+                                  //       fontWeight: FontWeight.bold,
+                                  //       color: Colors.white,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      "Enjoy watching the turtles",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(
-                                  width: 150,
-                                  child: Text(
-                                    events.eventName,
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.bold,
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 8.0),
-                                SizedBox(
-                                  width: 150,
-                                  child: Text(
-                                    'Organized By: \n${events.organizationName}',
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 8.0),
-                                // SizedBox(
-                                //   height: 80,
-                                //   width: 150,
-                                //   child: Text(
-                                //     tours.description,
-                                //     maxLines: 2,
-                                //     style: const TextStyle(
-                                //       fontSize: 18,
-                                //       overflow: TextOverflow.ellipsis,
-                                //       fontWeight: FontWeight.w300,
-                                //       color: Colors.white,
-                                //     ),
-                                //   ),
-                                // ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.purple,
-                                  ),
-                                  onPressed: () {
-                                    Get.to(() => EventsScreen(
-                                        eventName: events.eventName,
-                                        address: events.address,
-                                        imagePath: events.imagePath,
-                                        orgName: events.organizationName,
-                                        desc: events.description,
-                                        price: events.price,
-                                        id: events.id));
-                                  },
-                                  child: const Text(
-                                    'Details',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                              ],
-                            ),
-                          ],
-                          // child: Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          //   children: [
-                          //     Container(
-                          //       height: 400,
-                          //       width: 200,
-                          //       child: imagePath != null? Image.asset(imagePath!.path, fit: BoxFit.fill,) : Container(color: Colors.blue,),
-                          //     ),
-                          //     Column(
-                          //       // crossAxisAlignment: CrossAxisAlignment.center,
-                          //       children: [
-                          //         cardListTile('Event: ', events.eventName),
-                          //         cardListTile('Organized By: ', events.organizationName),
-                          //         cardListTile('Description: ', events.description),
-                          //       ],
-                          //     ),
-                          //   ],
-                          // ),
+                          ),
                         ),
                       ),
                     );

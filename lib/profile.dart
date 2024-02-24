@@ -263,6 +263,19 @@ class StackExample extends StatelessWidget {
             ),
           ),
           const Rating(),
+          const Padding(
+            padding: EdgeInsets.all(20),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Top Volunteers",
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+              ),
+            ),
+          ),
+          const TopContributers(),
         ],
       ),
     );
@@ -343,6 +356,54 @@ class Rating extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ---------------Top Contributers---------------
+class TopContributers extends StatefulWidget {
+  const TopContributers({super.key});
+
+  @override
+  State<TopContributers> createState() => _TopContributersState();
+}
+
+class _TopContributersState extends State<TopContributers> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Container(
+        width: double.maxFinite,
+        height: 500,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.grey.shade200,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView.builder(
+            padding: const EdgeInsets.all(5),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Container(
+                padding: const EdgeInsets.only(top: 5),
+                decoration: const BoxDecoration(
+                  border: Border(bottom: BorderSide(width: 1)),
+                ),
+                child: const ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: AssetImage("assets/images/profile.jpeg"),
+                    radius: 30,
+                  ),
+                  title: Text("@alicep43"),
+                  contentPadding: EdgeInsets.all(5),
+                ),
+              );
+            },
           ),
         ),
       ),

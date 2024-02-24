@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:horizon/card_discriptions/event_details.dart';
 import './controller/homepage_controller.dart';
 
 class VolunteerPage extends StatefulWidget {
@@ -10,8 +11,8 @@ class VolunteerPage extends StatefulWidget {
   State<VolunteerPage> createState() => _VolunteerPageState();
 }
 
-class _VolunteerPageState extends State<VolunteerPage> with TickerProviderStateMixin{
-
+class _VolunteerPageState extends State<VolunteerPage>
+    with TickerProviderStateMixin {
   final _authController = Get.put(AuthController());
   late final TabController _tabController;
 
@@ -72,152 +73,226 @@ class _VolunteerPageState extends State<VolunteerPage> with TickerProviderStateM
           controller: _tabController,
           children: [
             Obx(
-                  () => ListView.builder(
+              () => ListView.builder(
                   itemCount: _authController.volunteerData.length,
                   itemBuilder: (BuildContext context, int index) {
                     final volunteers = _authController.volunteerData[index];
                     return volunteers.type == "Tour"
                         ? Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Card(
-                        color: const Color.fromARGB(255, 7, 159, 159)
-                            .withOpacity(0.6),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: 20.h, left: 10.w),
-                              child: Image.asset(
-                                "", // Replace 'image.png' with your image asset path
-                                width: 100.w,
-                                height: 200.h,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            SizedBox(width: 20.w),
-                            Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Text(
-                                  volunteers.eventName,
-                                  style: TextStyle(
-                                    fontSize: 26.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                            padding: const EdgeInsets.all(8),
+                            child: InkWell(
+                              onTap: () {
+                                Get.to(
+                                  () => EventScreen(
+                                    maxSlots: "5",
+                                    address: "Goa",
+                                    eventName: "Turtle",
+                                    toDate: "2024-02-27",
+                                    fromDate: "2024-02-21",
+                                    orgName: "Karen",
+                                    price: "1200",
+                                    desc: "enjoy seeing the turtle",
+                                    imagePath: "assets/images/sc1.jpeg",
+                                    endTime: "10:15 PM",
+                                    startTime: "3:15 AM",
                                   ),
-                                ),
-                                SizedBox(height: 8.h),
-                                Text(
-                                  'Volunteers: ${volunteers.volNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: double.maxFinite,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    image: const DecorationImage(
+                                      image: NetworkImage(
+                                          "assets/images/tour1.jpeg"),
+                                      fit: BoxFit.fill,
+                                      opacity: 0.6,
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                ),
-                                SizedBox(height: 8.h),
-                                // cardListTile('', events.description),
-                                SizedBox(
-                                  height: 80.h,
-                                  width: 150.w,
-                                  child: Text(
-                                    volunteers.role,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                      fontSize: 17.sp,
-                                      overflow: TextOverflow.ellipsis,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.white,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.black.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: const Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            "Turtle",
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            '${"5"}, ${"Goa"}',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.symmetric(
+                                        //     horizontal: 10,
+                                        //     vertical: 2,
+                                        //   ),
+                                        //   child: Text(
+                                        //     'Max-Slots: ${tours.maxSlots}',
+                                        //     style: const TextStyle(
+                                        //       fontSize: 14,
+                                        //       fontWeight: FontWeight.bold,
+                                        //       color: Colors.white,
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                        Padding(
+                                          padding: EdgeInsets.all(10.0),
+                                          child: Text(
+                                            "Enjoy watching the turtles",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
-                    )
+                          )
                         : null;
                   }),
             ),
             Obx(
-                  () => ListView.builder(
+              () => ListView.builder(
                   itemCount: _authController.volunteerData.length,
                   itemBuilder: (BuildContext context, int index) {
                     final volunteers = _authController.volunteerData[index];
                     return volunteers.type == "Event"
                         ? Padding(
-                      padding: EdgeInsets.all(8.r),
-                      child: Card(
-                        color: const Color.fromARGB(255, 7, 159, 159)
-                            .withOpacity(0.6),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: 20.h, left: 10.w),
-                              child: Image.asset(
-                                "", // Replace 'image.png' with your image asset path
-                                width: 100.w,
-                                height: 200.h,
-                                fit: BoxFit.fill,
-                              ),
+                            padding: EdgeInsets.all(8.r),
+                            child: InkWell(
+                        onTap: () {
+                          Get.to(
+                            () => EventScreen(
+                              maxSlots: "5",
+                              address: "Goa",
+                              eventName: "Turtle",
+                              toDate: "2024-02-27",
+                              fromDate: "2024-02-21",
+                              orgName: "Karen",
+                              price: "1200",
+                              desc: "enjoy seeing the turtle",
+                              imagePath: "assets/images/sc1.jpeg",
+                              endTime: "10:15 PM",
+                              startTime: "3:15 AM",
                             ),
-                            SizedBox(width: 20.w),
-                            Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Text(
-                                  volunteers.eventName,
-                                  style: TextStyle(
-                                    fontSize: 26.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8.h),
-                                Text(
-                                  'Volunteers: ${volunteers.volNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8.h),
-                                // cardListTile('', events.description),
-                                SizedBox(
-                                  height: 80.h,
-                                  width: 150.w,
-                                  child: Text(
-                                    volunteers.role,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                      fontSize: 17.sp,
-                                      overflow: TextOverflow.ellipsis,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.white,
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: double.maxFinite,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                image: NetworkImage("assets/images/tour1.jpeg"),
+                                fit: BoxFit.fill,
+                                opacity: 0.6,
+                              ),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 2,
+                                    ),
+                                    child: Text(
+                                      "Turtle",
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 2,
+                                    ),
+                                    child: Text(
+                                      '${"5"}, ${"Goa"}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.symmetric(
+                                  //     horizontal: 10,
+                                  //     vertical: 2,
+                                  //   ),
+                                  //   child: Text(
+                                  //     'Max-Slots: ${tours.maxSlots}',
+                                  //     style: const TextStyle(
+                                  //       fontSize: 14,
+                                  //       fontWeight: FontWeight.bold,
+                                  //       color: Colors.white,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      "Enjoy watching the turtles",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                    )
+                          )
                         : null;
                   }),
             ),
