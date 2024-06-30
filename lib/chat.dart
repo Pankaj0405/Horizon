@@ -18,7 +18,7 @@ class _ChatPageState extends State<ChatPage> {
   final ScrollController _scrollController = ScrollController();
   List<Map<String, dynamic>> _chatHistory = [];
   void getAnswer() async {
-    // final url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyB6rlfCo-J1SHsuT1ORnEInttpiCwXV864";
+    // final url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=";
     // final uri = Uri.parse(url);
     const apiKey = '';
     print(apiKey);
