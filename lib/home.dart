@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
+import 'package:horizon/controller/homepage_controller.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,10 +18,64 @@ class _MyAppState extends State<Home> {
     'assets/images/sc2.jpeg',
     'assets/images/sc3.jpeg'
   ];
+  final controller=Get.put(AuthController());
+  bool isLoading1 = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchData();
+  }
+  Future<void> fetchData() async {
+    setState(() {
+      isLoading1 =
+      true; // Set isLoading to false to hide the circular progress indicator
+    });
+  await controller.getTour();
+   await controller.getEvent();
+      await  controller.getVolunteers();
+    setState(() {
+      isLoading1 =
+      false; // Set isLoading to false to hide the circular progress indicator
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return isLoading1
+        ? Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
+        height: MediaQuery.of(context).size.height*1,
+        width: MediaQuery.of(context).size.width*1,
+
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 150,
+                height: 150,
+                child: Image(
+                  image: AssetImage(
+                    "assets/images/logo.png",
+                  ),
+                ),
+              ),
+              SizedBox(height: 10,),
+              SizedBox(
+                width: 80,
+                child: LinearProgressIndicator(
+                    backgroundColor: Colors.blue.shade100,
+                    color: Colors.blueAccent,
+                    semanticsValue: "5"                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    )
+        :  SafeArea(
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 80,
@@ -46,7 +102,7 @@ class _MyAppState extends State<Home> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 10,
+          
           ),
           child: ListView(
             children: [
@@ -103,21 +159,22 @@ class _MyAppState extends State<Home> {
               // ------------------------------search bar--------------------------------
 
               Container(
-                height: 200,
+                height: 250,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30),bottomRight: Radius.circular(30)),
                   image: DecorationImage(
                     image: AssetImage(
-                      "assets/images/tour1.jpeg",
+                      "assets/images/sc1.jpeg",
                     ),
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
 
-              SizedBox(
-                height: 10,
-              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
 
               // const Row(
               //   mainAxisAlignment: MainAxisAlignment.start,
@@ -137,7 +194,7 @@ class _MyAppState extends State<Home> {
               //     ),
               //   ],
               // ),
-              SizedBox(height: 35),
+              // SizedBox(height: 35),
 
               // SizedBox(
               //   height: 220,
@@ -473,9 +530,9 @@ class _MyAppState extends State<Home> {
               //     ),
               //   ),
               // ),
-              MostPopularMarine(),
-              SizedBox(height: 35),
-              QuickMarineWorkout(),
+              // MostPopularMarine(),
+              // SizedBox(height: 35),
+              // QuickMarineWorkout(),
               SizedBox(height: 35),
               PopularTours(),
               SizedBox(height: 35),
@@ -587,236 +644,236 @@ class _MyAppState extends State<Home> {
 
 //----------- Most popular marine activities------------------------
 
-class MostPopularMarine extends StatefulWidget {
-  const MostPopularMarine({super.key});
-
-  @override
-  State<MostPopularMarine> createState() => _MostPopularMarineState();
-}
-
-class _MostPopularMarineState extends State<MostPopularMarine> {
-  List upcomingEventsCards = [
-    // color will be replaced by images
-    [
-      "Hatchling hustle",
-      "watching sea turtles going on their journey",
-      true,
-      "assets/images/tour3.jpeg"
-    ],
-    [
-      "Scubadiving",
-      "Explore the sea and it's creatures",
-      false,
-      "assets/images/tour5.jpg"
-    ],
-    [
-      "Beach wedding",
-      "A wedding wave is going to strike the beach",
-      true,
-      "assets/images/event2.jpeg"
-    ],
-    [
-      "Scubasauras",
-      "The jurrasic for scuba divers",
-      true,
-      "assets/images/tour5.jpg"
-    ],
-    [
-      "Beach sand party",
-      "it's can't be rock because it's a beach with sand",
-      true,
-      "assets/images/event5.jpg"
-    ],
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 22.0),
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Most popular marine activities",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 5),
-        CarouselSlider(
-          items: upcomingEventsCards
-              .map(
-                (item) => InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 400,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(item[3]),
-                        fit: BoxFit.fill,
-                      ),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(
-                              item[0],
-                              style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(
-                              item[1],
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
-          options: CarouselOptions(
-              enlargeCenterPage: true,
-              aspectRatio: 2.0,
-              autoPlay: true,
-              enableInfiniteScroll: true,
-              viewportFraction: 0.8,
-              animateToClosest: true,
-              height: 170),
-        ),
-      ],
-    );
-  }
-}
-
-//----------- Quick marine workouts------------------------
-
-class QuickMarineWorkout extends StatefulWidget {
-  const QuickMarineWorkout({super.key});
-
-  @override
-  State<QuickMarineWorkout> createState() => _QuickMarineWorkoutState();
-}
-
-class _QuickMarineWorkoutState extends State<QuickMarineWorkout> {
-  List upcomingEventsCards = [
-    // color will be replaced by images
-    ["Title", "description", true],
-    ["inputText1", "inputText2", false],
-    ["inputText2", "inputText2", true],
-    ["inputText3", "inputText2", false],
-    ["inputText4", "inputText2", true],
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 22.0),
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Quick Marine Workouts",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 5),
-        CarouselSlider(
-          items: upcomingEventsCards
-              .map(
-                (item) => InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 400,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage("assets/images/sc1.jpeg"),
-                        fit: BoxFit.fill,
-                      ),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(
-                              item[0],
-                              style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(
-                              item[1],
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
-          options: CarouselOptions(
-              enlargeCenterPage: true,
-              aspectRatio: 2.0,
-              autoPlay: false,
-              enableInfiniteScroll: true,
-              viewportFraction: 0.8,
-              animateToClosest: true,
-              height: 170),
-        ),
-      ],
-    );
-  }
-}
+// class MostPopularMarine extends StatefulWidget {
+//   const MostPopularMarine({super.key});
+//
+//   @override
+//   State<MostPopularMarine> createState() => _MostPopularMarineState();
+// }
+//
+// class _MostPopularMarineState extends State<MostPopularMarine> {
+//   List upcomingEventsCards = [
+//     // color will be replaced by images
+//     [
+//       "Hatchling hustle",
+//       "watching sea turtles going on their journey",
+//       true,
+//       "assets/images/tour3.jpeg"
+//     ],
+//     [
+//       "Scubadiving",
+//       "Explore the sea and it's creatures",
+//       false,
+//       "assets/images/tour5.jpg"
+//     ],
+//     [
+//       "Beach wedding",
+//       "A wedding wave is going to strike the beach",
+//       true,
+//       "assets/images/event2.jpeg"
+//     ],
+//     [
+//       "Scubasauras",
+//       "The jurrasic for scuba divers",
+//       true,
+//       "assets/images/tour5.jpg"
+//     ],
+//     [
+//       "Beach sand party",
+//       "it's can't be rock because it's a beach with sand",
+//       true,
+//       "assets/images/event5.jpg"
+//     ],
+//   ];
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         const Padding(
+//           padding: EdgeInsets.only(left: 22.0),
+//           child: Align(
+//             alignment: Alignment.topLeft,
+//             child: Text(
+//               "Most popular marine activities",
+//               style: TextStyle(
+//                 fontSize: 20,
+//                 color: Colors.black,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//           ),
+//         ),
+//         const SizedBox(height: 5),
+//         CarouselSlider(
+//           items: upcomingEventsCards
+//               .map(
+//                 (item) => InkWell(
+//                   onTap: () {},
+//                   child: Container(
+//                     width: 400,
+//                     decoration: BoxDecoration(
+//                       image: DecorationImage(
+//                         image: AssetImage(item[3]),
+//                         fit: BoxFit.fill,
+//                       ),
+//                       borderRadius: BorderRadius.circular(15),
+//                     ),
+//                     child: Container(
+//                       decoration: BoxDecoration(
+//                         color: Colors.black.withOpacity(0.5),
+//                         borderRadius: BorderRadius.circular(15),
+//                       ),
+//                       child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.end,
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+//                           Padding(
+//                             padding: const EdgeInsets.all(10.0),
+//                             child: Text(
+//                               item[0],
+//                               style: const TextStyle(
+//                                 fontSize: 22,
+//                                 fontWeight: FontWeight.bold,
+//                                 color: Colors.white,
+//                               ),
+//                             ),
+//                           ),
+//                           Padding(
+//                             padding: const EdgeInsets.all(10.0),
+//                             child: Text(
+//                               item[1],
+//                               style: const TextStyle(
+//                                 color: Colors.white,
+//                               ),
+//                               maxLines: 2,
+//                               overflow: TextOverflow.ellipsis,
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               )
+//               .toList(),
+//           options: CarouselOptions(
+//               enlargeCenterPage: true,
+//               aspectRatio: 2.0,
+//               autoPlay: true,
+//               enableInfiniteScroll: true,
+//               viewportFraction: 0.8,
+//               animateToClosest: true,
+//               height: 170),
+//         ),
+//       ],
+//     );
+//   }
+// }
+//
+// //----------- Quick marine workouts------------------------
+//
+// class QuickMarineWorkout extends StatefulWidget {
+//   const QuickMarineWorkout({super.key});
+//
+//   @override
+//   State<QuickMarineWorkout> createState() => _QuickMarineWorkoutState();
+// }
+//
+// class _QuickMarineWorkoutState extends State<QuickMarineWorkout> {
+//   List upcomingEventsCards = [
+//     // color will be replaced by images
+//     ["Title", "description", true],
+//     ["inputText1", "inputText2", false],
+//     ["inputText2", "inputText2", true],
+//     ["inputText3", "inputText2", false],
+//     ["inputText4", "inputText2", true],
+//   ];
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         const Padding(
+//           padding: EdgeInsets.only(left: 22.0),
+//           child: Align(
+//             alignment: Alignment.topLeft,
+//             child: Text(
+//               "Quick Marine Workouts",
+//               style: TextStyle(
+//                 fontSize: 20,
+//                 color: Colors.black,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//           ),
+//         ),
+//         const SizedBox(height: 5),
+//         CarouselSlider(
+//           items: upcomingEventsCards
+//               .map(
+//                 (item) => InkWell(
+//                   onTap: () {},
+//                   child: Container(
+//                     width: 400,
+//                     decoration: BoxDecoration(
+//                       image: const DecorationImage(
+//                         image: AssetImage("assets/images/sc1.jpeg"),
+//                         fit: BoxFit.fill,
+//                       ),
+//                       borderRadius: BorderRadius.circular(15),
+//                     ),
+//                     child: Container(
+//                       decoration: BoxDecoration(
+//                         color: Colors.black.withOpacity(0.5),
+//                         borderRadius: BorderRadius.circular(15),
+//                       ),
+//                       child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.end,
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+//                           Padding(
+//                             padding: const EdgeInsets.all(10.0),
+//                             child: Text(
+//                               item[0],
+//                               style: const TextStyle(
+//                                 fontSize: 22,
+//                                 fontWeight: FontWeight.bold,
+//                                 color: Colors.white,
+//                               ),
+//                             ),
+//                           ),
+//                           Padding(
+//                             padding: const EdgeInsets.all(10.0),
+//                             child: Text(
+//                               item[1],
+//                               style: const TextStyle(
+//                                 color: Colors.white,
+//                               ),
+//                               maxLines: 2,
+//                               overflow: TextOverflow.ellipsis,
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               )
+//               .toList(),
+//           options: CarouselOptions(
+//               enlargeCenterPage: true,
+//               aspectRatio: 2.0,
+//               autoPlay: false,
+//               enableInfiniteScroll: true,
+//               viewportFraction: 0.8,
+//               animateToClosest: true,
+//               height: 170),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 //----------- Popular tour------------------------
 
@@ -828,40 +885,46 @@ class PopularTours extends StatefulWidget {
 }
 
 class _PopularToursState extends State<PopularTours> {
-  List upcomingEventsCards = [
-    // color will be replaced by images
-    [
-      "The silent sea",
-      "Perfect for embrassing the nature",
-      true,
-      "assets/images/tour1.jpeg"
-    ],
-    [
-      "The swim beach",
-      "If you like swimming in ocean and watch the aquatics, this is the place",
-      false,
-      "assets/images/tour2.jpg"
-    ],
-    [
-      "Galgibaga",
-      "Perfect for watching the new journey of hatchligs",
-      true,
-      "assets/images/tour3.jpeg"
-    ],
-    [
-      "The blue lagoon",
-      "If you want to see the real untouchd beauty of nature",
-      false,
-      "assets/images/tour4.jpg"
-    ],
-    [
-      "Scubasauras",
-      "The jurrasic for scuba divers",
-      true,
-      "assets/images/tour5.jpg"
-    ],
-  ];
+  // List upcomingEventsCards = [
+  //   // color will be replaced by images
+  //   [
+  //     "The silent sea",
+  //     "Perfect for embrassing the nature",
+  //     true,
+  //     "assets/images/tour1.jpeg"
+  //   ],
+  //   [
+  //     "The swim beach",
+  //     "If you like swimming in ocean and watch the aquatics, this is the place",
+  //     false,
+  //     "assets/images/tour2.jpg"
+  //   ],
+  //   [
+  //     "Galgibaga",
+  //     "Perfect for watching the new journey of hatchligs",
+  //     true,
+  //     "assets/images/tour3.jpeg"
+  //   ],
+  //   [
+  //     "The blue lagoon",
+  //     "If you want to see the real untouchd beauty of nature",
+  //     false,
+  //     "assets/images/tour4.jpg"
+  //   ],
+  //   [
+  //     "Scubasauras",
+  //     "The jurrasic for scuba divers",
+  //     true,
+  //     "assets/images/tour5.jpg"
+  //   ],
+  // ];
+final controller=Get.put(AuthController());
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -882,7 +945,7 @@ class _PopularToursState extends State<PopularTours> {
         ),
         const SizedBox(height: 5),
         CarouselSlider(
-          items: upcomingEventsCards
+          items: controller.tourData
               .map(
                 (item) => InkWell(
                   onTap: () {},
@@ -890,7 +953,7 @@ class _PopularToursState extends State<PopularTours> {
                     width: 400,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(item[3]),
+                        image: NetworkImage(item.imagePath),
                         fit: BoxFit.fill,
                       ),
                       borderRadius: BorderRadius.circular(15),
@@ -907,7 +970,7 @@ class _PopularToursState extends State<PopularTours> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              item[0],
+                              item.eventName,
                               style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -918,7 +981,7 @@ class _PopularToursState extends State<PopularTours> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              item[1],
+                              item.description,
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
@@ -957,39 +1020,40 @@ class PopularEvents extends StatefulWidget {
 }
 
 class _PopularEventsState extends State<PopularEvents> {
-  List upcomingEventsCards = [
-    // color will be replaced by images
-    [
-      "The Fire Night",
-      "enjoy a night in the city but differently",
-      true,
-      "assets/images/event1.jpg"
-    ],
-    [
-      "Beach wedding",
-      "A wedding wave is going to strike the beach",
-      false,
-      "assets/images/event2.jpeg"
-    ],
-    [
-      "The beach get together",
-      "meet new people and discuss about, well it's up to you",
-      true,
-      "assets/images/event3.jpeg"
-    ],
-    [
-      "Hatchling festival",
-      "see the turtles emerging from the earth",
-      false,
-      "assets/images/event4.jpeg"
-    ],
-    [
-      "Beach sand party",
-      "it's can't be rock because it's a beach with sand",
-      true,
-      "assets/images/event5.jpg"
-    ],
-  ];
+  // List upcomingEventsCards = [
+  //   // color will be replaced by images
+  //   [
+  //     "The Fire Night",
+  //     "enjoy a night in the city but differently",
+  //     true,
+  //     "assets/images/event1.jpg"
+  //   ],
+  //   [
+  //     "Beach wedding",
+  //     "A wedding wave is going to strike the beach",
+  //     false,
+  //     "assets/images/event2.jpeg"
+  //   ],
+  //   [
+  //     "The beach get together",
+  //     "meet new people and discuss about, well it's up to you",
+  //     true,
+  //     "assets/images/event3.jpeg"
+  //   ],
+  //   [
+  //     "Hatchling festival",
+  //     "see the turtles emerging from the earth",
+  //     false,
+  //     "assets/images/event4.jpeg"
+  //   ],
+  //   [
+  //     "Beach sand party",
+  //     "it's can't be rock because it's a beach with sand",
+  //     true,
+  //     "assets/images/event5.jpg"
+  //   ],
+  // ];
+final controller =Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -1011,7 +1075,7 @@ class _PopularEventsState extends State<PopularEvents> {
         ),
         const SizedBox(height: 5),
         CarouselSlider(
-          items: upcomingEventsCards
+          items: controller.eventData
               .map(
                 (item) => InkWell(
                   onTap: () {},
@@ -1019,7 +1083,7 @@ class _PopularEventsState extends State<PopularEvents> {
                     width: 400,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(item[3]),
+                        image: NetworkImage(item.imagePath),
                         fit: BoxFit.fill,
                       ),
                       borderRadius: BorderRadius.circular(15),
@@ -1036,7 +1100,7 @@ class _PopularEventsState extends State<PopularEvents> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              item[0],
+                              item.eventName,
                               style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -1047,7 +1111,7 @@ class _PopularEventsState extends State<PopularEvents> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              item[1],
+                              item.description,
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
@@ -1086,25 +1150,7 @@ class PopularVolunteer extends StatefulWidget {
 }
 
 class _PopularVolunteerState extends State<PopularVolunteer> {
-  List upcomingEventsCards = [
-    // color will be replaced by images
-    ["Denice", "An enthusiast about octopus", true, "assets/images/tour2.jpg"],
-    [
-      "Alice",
-      "Lives to follow the hatchlings",
-      false,
-      "assets/images/event1.jpg"
-    ],
-    [
-      "Maya",
-      "comes outside to escape the city",
-      true,
-      "assets/images/tour2.jpg"
-    ],
-    ["Jack", "explorer of the corals", false, "assets/images/event2.jpeg"],
-    ["Jimmy", "Loves the beach vibes", true, "assets/images/tour3.jpeg"],
-  ];
-
+  final controller=Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -1125,7 +1171,7 @@ class _PopularVolunteerState extends State<PopularVolunteer> {
         ),
         const SizedBox(height: 5),
         CarouselSlider(
-          items: upcomingEventsCards
+          items: controller.volunteerData
               .map(
                 (item) => InkWell(
                   onTap: () {},
@@ -1133,7 +1179,7 @@ class _PopularVolunteerState extends State<PopularVolunteer> {
                     width: 400,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(item[3]),
+                        image: NetworkImage(item.imagePath),
                         fit: BoxFit.fill,
                       ),
                       borderRadius: BorderRadius.circular(15),
@@ -1150,7 +1196,7 @@ class _PopularVolunteerState extends State<PopularVolunteer> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              item[0],
+                              item.eventName,
                               style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -1161,7 +1207,7 @@ class _PopularVolunteerState extends State<PopularVolunteer> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              item[1],
+                              item.role,
                               style: const TextStyle(
                                 color: Colors.white,
                               ),

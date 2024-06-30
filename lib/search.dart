@@ -20,10 +20,12 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
   final _authController = Get.put(AuthController());
   late final TabController _tabController;
 
+  bool isLoading1 = false;
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    fetchData();
   }
 
   @override
@@ -31,14 +33,60 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
     _tabController.dispose();
     super.dispose();
   }
-
+  Future<void> fetchData() async {
+    setState(() {
+      isLoading1 =
+      true; // Set isLoading to false to hide the circular progress indicator
+    });
+    await _authController.getTour();
+    await _authController.getEvent();
+    await  _authController.getVolunteers();
+    setState(() {
+      isLoading1 =
+      false; // Set isLoading to false to hide the circular progress indicator
+    }
+    );
+  }
   final List tourData = [];
 
   @override
   Widget build(BuildContext context) {
     _authController.getEvent();
     _authController.getTour();
-    return SafeArea(
+    return  isLoading1
+        ? Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
+        height: MediaQuery.of(context).size.height*1,
+        width: MediaQuery.of(context).size.width*1,
+
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 150,
+                height: 150,
+                child: Image(
+                  image: AssetImage(
+                    "assets/images/logo.png",
+                  ),
+                ),
+              ),
+              SizedBox(height: 10,),
+              SizedBox(
+                width: 80,
+                child: LinearProgressIndicator(
+                    backgroundColor: Colors.blue.shade100,
+                    color: Colors.blueAccent,
+                    semanticsValue: "5"                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    )
+        :   SafeArea(
       child: Scaffold(
         appBar: AppBar(
           // toolbarHeight: 120,
@@ -91,17 +139,18 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                         onTap: () {
                           Get.to(
                             () => EventScreen(
-                              maxSlots: "5",
-                              address: "Goa",
-                              eventName: "Turtle",
-                              toDate: "2024-02-27",
-                              fromDate: "2024-02-21",
-                              orgName: "Karen",
-                              price: "1200",
-                              desc: "enjoy seeing the turtle",
-                              imagePath: "assets/images/sc1.jpeg",
-                              endTime: "10:15 PM",
-                              startTime: "3:15 AM",
+                              maxSlots: tours.maxSlots,
+                              address: tours.address,
+                              eventName: tours.eventName,
+                              toDate: tours.To,
+                              fromDate: tours.From,
+                              orgName: tours.organizationName,
+                              price: tours.price,
+                              desc: tours.description,
+                              imagePath: tours.imagePath,
+                              endTime: tours.EndTime,
+                              startTime: tours.StartTime,
+                              id: tours.id, type:tours.type, vendorId: tours.vendorId,
                             ),
                           );
                         },
@@ -111,8 +160,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                             width: double.maxFinite,
                             height: 200,
                             decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                image: NetworkImage("assets/images/tour1.jpeg"),
+                              image:  DecorationImage(
+                                image: NetworkImage(tours.imagePath),
                                 fit: BoxFit.fill,
                                 opacity: 0.6,
                               ),
@@ -123,7 +172,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                 color: Colors.black.withOpacity(0.5),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: const Column(
+                              child:  Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -133,7 +182,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                       vertical: 2,
                                     ),
                                     child: Text(
-                                      "Turtle",
+                                      tours.eventName,
                                       style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold,
@@ -147,7 +196,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                       vertical: 2,
                                     ),
                                     child: Text(
-                                      '${"5"}, ${"Goa"}',
+                                      '${tours.price}, ${tours.address}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
@@ -172,7 +221,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                   Padding(
                                     padding: EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Enjoy watching the turtles",
+                                      tours.description,
                                       style: TextStyle(
                                         color: Colors.white,
                                       ),
@@ -194,24 +243,25 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                   shrinkWrap: true,
                   itemCount: _authController.eventData.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final events = _authController.eventData[index];
+                    final tours = _authController.eventData[index];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
                         onTap: () {
                           Get.to(
                             () => EventScreen(
-                              maxSlots: "5",
-                              address: "Goa",
-                              eventName: "Turtle",
-                              toDate: "2024-02-27",
-                              fromDate: "2024-02-21",
-                              orgName: "Karen",
-                              price: "1200",
-                              desc: "enjoy seeing the turtle",
-                              imagePath: "assets/images/sc1.jpeg",
-                              endTime: "10:15 PM",
-                              startTime: "3:15 AM",
+                              maxSlots: tours.maxSlots,
+                              address: tours.address,
+                              eventName: tours.eventName,
+                              toDate: tours.To,
+                              fromDate: tours.From,
+                              orgName: tours.organizationName,
+                              price: tours.price,
+                              desc: tours.description,
+                              imagePath: tours.imagePath,
+                              endTime: tours.EndTime,
+                              startTime: tours.StartTime,
+                              id: tours.id, type: tours.type, vendorId: tours.vendorId,
                             ),
                           );
                         },
@@ -221,8 +271,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                             width: double.maxFinite,
                             height: 200,
                             decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                image: NetworkImage("assets/images/tour1.jpeg"),
+                              image:  DecorationImage(
+                                image: NetworkImage(tours.imagePath),
                                 fit: BoxFit.fill,
                                 opacity: 0.6,
                               ),
@@ -233,7 +283,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                 color: Colors.black.withOpacity(0.5),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: const Column(
+                              child:  Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -243,7 +293,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                       vertical: 2,
                                     ),
                                     child: Text(
-                                      "Turtle",
+                                      tours.eventName,
                                       style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold,
@@ -257,7 +307,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                       vertical: 2,
                                     ),
                                     child: Text(
-                                      '${"5"}, ${"Goa"}',
+                                      '${tours.price}, ${tours.address}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
@@ -282,7 +332,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                   Padding(
                                     padding: EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Enjoy watching the turtles",
+                                     tours.description,
                                       style: TextStyle(
                                         color: Colors.white,
                                       ),

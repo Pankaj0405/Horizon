@@ -41,6 +41,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -54,4 +55,12 @@ android {
 
 flutter {
     source '../..'
+}
+dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
+//    implementation 'com.google.firebase:firebase-messaging:21.1.0'
+    implementation platform('com.google.firebase:firebase-bom:32.2.2')
+
+    implementation 'com.google.firebase:firebase-auth'
+//    implementation 'com.google.android.gms:play-services-fitness:21.1.0'
 }

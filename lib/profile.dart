@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:horizon/controller/auth_controller1.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import './edit_profile.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -10,19 +13,32 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return  SafeArea(
       child: Scaffold(
+        endDrawer: CustomDrawer(),
         body: StackExample(),
       ),
     );
   }
 }
 
-class StackExample extends StatelessWidget {
+class StackExample extends StatefulWidget {
   const StackExample({super.key});
 
+  @override
+  State<StackExample> createState() => _StackExampleState();
+}
+
+class _StackExampleState extends State<StackExample> {
+  final _controller = PageController(
+    initialPage: 0, // Start at the second page (the first duplicate)
+    viewportFraction: 0.9, // Adjust this value as needed
+  );
+
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -132,7 +148,9 @@ class StackExample extends StatelessWidget {
                 width: 20,
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
                 icon: const Icon(
                   Icons.settings,
                 ),
@@ -191,83 +209,11 @@ class StackExample extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Container(
-              height: 180,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 13,
-                  top: 13,
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        const Expanded(
-                          child: Text(
-                            "Tours",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30),
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.keyboard_arrow_right,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/profile.jpeg"),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 7,
-                        ),
-                        const Text(
-                          "@alicep43",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    const Text(
-                      "Welcome to Seaventure! Discover amazing sea-related tours events, and volunteering opportunities.",
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          const Rating(),
           const Padding(
             padding: EdgeInsets.all(20),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text("Top Volunteers",
+              child: Text("Guidelines",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -275,8 +221,169 @@ class StackExample extends StatelessWidget {
               ),
             ),
           ),
-          const TopContributers(),
+          Container(
+            child: Column(
+              children: [
+                Container(
+                  height: 170,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: PageView.builder(
+                      onPageChanged: (index) {
+                        setState(() {
+                          currentIndex = index;
+                          // print(currentIndex);
+                        });
+                      },
+                      controller: _controller,
+                      itemCount: 5,
+                      itemBuilder: (BuildContext context, int index) {
+                        // currentIndex = index;
+
+                        return Container(
+                          width:  MediaQuery.of(context).size.width * 0.9,
+                          margin: EdgeInsets.only(right: 10),
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image:AssetImage(
+                                      'assets/images/${index+1}.jpg'),
+                                  fit: BoxFit.fill)),
+                        );
+                      }),
+                ),
+                SmoothPageIndicator(
+                  controller: _controller,
+                  count: 5,
+                  effect: ExpandingDotsEffect(
+                      activeDotColor: Colors.blueAccent,
+                      dotColor: Colors.black,
+                      dotHeight: 8,
+                      dotWidth: 8),
+                )
+              ],
+            ),
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(20.0),
+          //   child: Container(
+          //     height: 180,
+          //     decoration: BoxDecoration(
+          //       color: Colors.grey.shade200,
+          //       borderRadius: BorderRadius.circular(10),
+          //     ),
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(
+          //         left: 13,
+          //         top: 13,
+          //       ),
+          //       child: Column(
+          //         children: [
+          //           Row(
+          //             children: [
+          //               const Expanded(
+          //                 child: Text(
+          //                   "Tours",
+          //                   style: TextStyle(
+          //                       fontSize: 16, fontWeight: FontWeight.bold),
+          //                 ),
+          //               ),
+          //               Padding(
+          //                 padding: const EdgeInsets.only(left: 30),
+          //                 child: IconButton(
+          //                   onPressed: () {},
+          //                   icon: const Icon(
+          //                     Icons.keyboard_arrow_right,
+          //                   ),
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //           const SizedBox(
+          //             height: 8,
+          //           ),
+          //           Row(
+          //             children: [
+          //               Container(
+          //                 height: 40,
+          //                 width: 40,
+          //                 decoration: const BoxDecoration(
+          //                   shape: BoxShape.circle,
+          //                   image: DecorationImage(
+          //                     image: AssetImage("assets/images/profile.jpeg"),
+          //                     fit: BoxFit.fill,
+          //                   ),
+          //                 ),
+          //               ),
+          //               const SizedBox(
+          //                 width: 7,
+          //               ),
+          //               const Text(
+          //                 "@alicep43",
+          //                 style: TextStyle(fontWeight: FontWeight.bold),
+          //               ),
+          //             ],
+          //           ),
+          //           const SizedBox(
+          //             height: 6,
+          //           ),
+          //           const Text(
+          //             "Welcome to Seaventure! Discover amazing sea-related tours events, and volunteering opportunities.",
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // const Rating(),
+
+          // const TopContributers(),
         ],
+      ),
+    );
+  }
+}
+class CustomDrawer extends StatelessWidget {
+  CustomDrawer({super.key});
+
+  final _authController = Get.put(AuthController1());
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Container(
+        color: Colors.white.withOpacity(0.7),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.notifications),
+              title: Text('Notification'),
+              onTap: () {
+                // Handle notification tap
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Sign Out'),
+              onTap: () {
+                // Handle sign out tap
+                _authController.logout();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

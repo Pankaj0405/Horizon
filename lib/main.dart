@@ -1,4 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:horizon/profilepicScreen.dart';
+import 'package:horizon/splash_Screen.dart';
 import './firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -8,13 +13,21 @@ import './search.dart';
 import './camera/phone_camera.dart';
 import './volunteer.dart';
 // import 'package:camera/camera.dart';
-
+// chatbot
 // late List<CameraDescription> cameras;
 // late CameraController controller;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // final apiKey = Platform.environment['AIzaSyB6rlfCo-J1SHsuT1ORnEInttpiCwXV864'];
+  // if (apiKey == null) {
+  //   print('No \$API_KEY environment variable');
+  //   exit(1);
+  // }
+
+  // The Gemini 1.5 models are versatile and work with most use cases
+  // final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
   runApp(const MyApp());
 }
 
@@ -25,71 +38,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 0;
 
-  void _navigateBottomeBar(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-// ignore: unused_element
-  final List _pages =  [
-    const Home(),
-    const Search(),
-    const CameraPage(),
-    const VolunteerPage(),
-    const Profile(),
-  ];
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: _pages[_selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: true,
-          showUnselectedLabels: false,
-          currentIndex: _selectedIndex,
-          onTap: _navigateBottomeBar,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.event,
-              ),
-              label: "Events & Tours",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.photo_camera_outlined,
-              ),
-              label: "Camera",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.volunteer_activism_outlined,
-              ),
-              label: "Volunteers",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_circle,
-              ),
-              label: "Profile",
-            ),
-          ],
-          iconSize: 25,
-          elevation: 50,
-        ),
-      ),
+      home: SplashScreen(),
     );
   }
 

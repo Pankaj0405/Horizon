@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class EventScreen extends StatefulWidget {
@@ -13,6 +14,11 @@ class EventScreen extends StatefulWidget {
   String imagePath;
   String startTime;
   String endTime;
+  String id;
+  String type;
+  String vendorId;
+
+
   EventScreen(
       {required this.maxSlots,
       required this.address,
@@ -23,8 +29,11 @@ class EventScreen extends StatefulWidget {
       required this.price,
       required this.desc,
       required this.imagePath,
-      required this.endTime,
+        required this.id,
+        required this.endTime,
       required this.startTime,
+        required this.type,
+        required this.vendorId,
       super.key});
 
   @override
@@ -314,7 +323,17 @@ class _EventScreenState extends State<EventScreen> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    Get.back();
+                    Get.snackbar("Thank You!","Booked Successfully",titleText: Text("Thank You!",style: TextStyle(
+                        color: Colors.green
+                    ),), messageText: Text("Booked Successfully",style: TextStyle(
+                        color: Colors.green
+                    ),),backgroundColor: Colors.white);
+
+                  });
+                },
                 // isExtended: true,
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,

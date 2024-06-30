@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AddEvent {
+class Booking {
   String id;
   String eventName;
   String organizationName;
@@ -15,8 +15,10 @@ class AddEvent {
   String StartTime;
   String EndTime;
   String vendorId;
+  String userId;
+  String userPhone;
 
-  AddEvent(
+  Booking(
       {required this.address,
         required this.description,
         required this.eventName,
@@ -30,6 +32,8 @@ class AddEvent {
         required this.StartTime,
         required this.EndTime,
         required this.vendorId,
+        required this.userId,
+        required this.userPhone,
         required this.type});
 
   Map<String, dynamic> toJson() => {
@@ -46,12 +50,14 @@ class AddEvent {
     "From":From,
     "Start Time":StartTime,
     "End Time":EndTime,
-    "vendorId":vendorId
+    "vendorId":vendorId,
+    'userId':userId,
+    "userPhone":userPhone
   };
 
-  static AddEvent fromSnap(Map<String, dynamic> snapshot) {
+  static Booking fromSnap(Map<String, dynamic> snapshot) {
 
-    return AddEvent(
+    return Booking(
         id: snapshot["id"],
         address: snapshot["Address"],
         description: snapshot["Description"],
@@ -59,13 +65,15 @@ class AddEvent {
         organizationName: snapshot["Organization Name"],
         maxSlots: snapshot["Max Slots"],
         price: snapshot["Booking price"],
-          imagePath: snapshot["Image Path"],
+        imagePath: snapshot["Image Path"],
         type: snapshot["Type"],
-      To:snapshot['To'],
-      From: snapshot['From'],
-      StartTime:snapshot["Start Time"],
-      EndTime: snapshot['End Time'],
-      vendorId: snapshot['vendorId']
+        To:snapshot['To'],
+        From: snapshot['From'],
+        StartTime:snapshot["Start Time"],
+        EndTime: snapshot['End Time'],
+        vendorId: snapshot['vendorId'],
+      userId: snapshot['userId'],
+      userPhone: snapshot['userPhone']
     );
   }
 }

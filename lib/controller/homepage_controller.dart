@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:horizon/models/booking.dart';
 import 'package:uuid/uuid.dart';
 import '../constants.dart';
 import '../models/event.dart' as event_model;
@@ -37,39 +38,65 @@ class AuthController extends GetxController {
   //   return tours;
   // }
 
-  void getEvent() async {
-    _eventData.bindStream(
-        firestore.collection('events').snapshots().map((QuerySnapshot query) {
-          List<event_model.AddEvent> retValue = [];
-          for (var element in query.docs) {
-            retValue.add(event_model.AddEvent.fromSnap(element));
-          }
-          return retValue;
-        }));
+  Future<void>  getEvent() async {
+    try {
+      final QuerySnapshot querySnapshot =
+      await firestore.collection('events').get();
+      List<event_model.AddEvent> events = querySnapshot.docs
+          .map((doc) =>
+          event_model.AddEvent.fromSnap(doc.data() as Map<String, dynamic>))
+          .toList();
+      eventData.assignAll(events);
+
+    } catch (e) {
+      // Handle any errors, e.g., connection issues or Firestore rules.
+      print('Error fetching data: $e');
+    }
+
   }
 
-  void getTour() async {
-    _tourData.bindStream(
-        firestore.collection('tours').snapshots().map((QuerySnapshot query) {
-          List<event_model.AddEvent> retValue = [];
-          for (var element in query.docs) {
-            retValue.add(event_model.AddEvent.fromSnap(element));
-          }
-          return retValue;
-        }));
+  Future<void> getTour() async {
+    try {
+      final QuerySnapshot querySnapshot =
+      await firestore.collection('tours').get();
+      List<event_model.AddEvent> events = querySnapshot.docs
+          .map((doc) =>
+          event_model.AddEvent.fromSnap(doc.data() as Map<String, dynamic>))
+          .toList();
+      tourData.assignAll(events);
+
+    } catch (e) {
+      // Handle any errors, e.g., connection issues or Firestore rules.
+      print('Error fetching data: $e');
+    }
+
+    // print(tourData[1].description);
   }
 
-  void getVolunteers() async {
-    _volunteerData.bindStream(firestore
-        .collection('volunteers')
-        .snapshots()
-        .map((QuerySnapshot query) {
-      List<volunteer_model.AddVolunteers> retValue = [];
-      for (var element in query.docs) {
-        retValue.add(volunteer_model.AddVolunteers.fromSnap(element));
-      }
-      return retValue;
-    }));
+  Future<void> getVolunteers() async {
+    try {
+      final QuerySnapshot querySnapshot =
+      await firestore.collection('volunteers').get();
+      List<volunteer_model.AddVolunteers> events = querySnapshot.docs
+          .map((doc) =>
+          volunteer_model.AddVolunteers.fromSnap(doc.data() as Map<String, dynamic>))
+          .toList();
+      volunteerData.assignAll(events);
+      print(querySnapshot.docs);
+    } catch (e) {
+      // Handle any errors, e.g., connection issues or Firestore rules.
+      print('Error fetching data: $e');
+    }
+    // _volunteerData.bindStream(firestore
+    //     .collection('volunteers')
+    //     .snapshots()
+    //     .map((QuerySnapshot query) {
+    //   List<volunteer_model.AddVolunteers> retValue = [];
+    //   for (var element in query.docs) {
+    //     retValue.add(volunteer_model.AddVolunteers.fromSnap(element));
+    //   }
+    //   return retValue;
+    // }));
   }
 
   void tourBookings(String id) async {
@@ -85,6 +112,80 @@ class AuthController extends GetxController {
     }
 
   }
+  Future<void> addBooking(
+      String eventName,
+      String orgName,
+      String address,
+      String desc,
+      String maxSlots,
+      String price,
+      String imagePath,
+      String type,
+      String fromDate,
+      String toDate,
+      String startTime,
+      String endTime,
+      String id,
+      String vendorId) async {
+    try {
+      String eventId = const Uuid().v1();
+      // String id = const Uuid().v1();
+      if (eventName.isNotEmpty &&
+          orgName.isNotEmpty &&
+          address.isNotEmpty &&
+          desc.isNotEmpty &&
+          maxSlots.isNotEmpty &&
+          price.isNotEmpty &&
+          imagePath.isNotEmpty &&
+          type != 'Select' &&
+          fromDate.isNotEmpty &&
+          toDate.isNotEmpty &&
+          startTime.isNotEmpty &&
+          endTime.isNotEmpty &&
+          vendorId.isNotEmpty) {
+        Booking newEvent = Booking(
+            address: address,
+            description: desc,
+            eventName: eventName,
+            organizationName: orgName,
+            id: eventId,
+            maxSlots: maxSlots,
+            price: price,
+            imagePath: imagePath,
+            type: type,
+            From: fromDate,
+            To: toDate,
+            StartTime: startTime,
+            EndTime: endTime,
+            vendorId: vendorId,
+        userId: firebaseAuth.currentUser!.uid,
+        userPhone: firebaseAuth.currentUser!.phoneNumber!);
+        if (type == "Event") {
+          await firestore
+              .collection('events')
+              .doc(id).collection('bookings').doc(eventId)
+              .set(newEvent.toJson())
+              .then((value) =>
+              Get.snackbar('Alert', 'Event created successfully'));
+        } else {
+          await firestore
+              .collection('tours')
+              .doc(id).collection('bookings').doc(eventId)
+              .set(newEvent.toJson())
+              .then((value) =>
+              Get.snackbar('Alert', 'Tour created successfully'));
+        }
+      } else {
+        Get.back();
+        Get.snackbar('Alert', 'Please enter all fields');
+      }
+    } catch (e) {
+      Get.back();
+      Get.snackbar('Error creating event or tour', e.toString());
+      print(e.toString());
+    }
+  }
+
 
   void eventBookings(String id) async {
     try {

@@ -23,6 +23,44 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606195344134:android:ec86e0f1057d6011763487",
+        "android_client_info": {
+          "package_name": "com.example.horizon_vendor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPVRbkK55_oQBQ-juiHFbsYT3xLT5Qg7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606195344134:android:8af0d7f25ac91701763487",
+        "android_client_info": {
+          "package_name": "com.example.ocean_vendors_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPVRbkK55_oQBQ-juiHFbsYT3xLT5Qg7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"
