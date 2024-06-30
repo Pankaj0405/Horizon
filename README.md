@@ -19,11 +19,11 @@ Horizon User App is a Flutter mobile application dedicated to marine life conser
 - **Fish Recognition Modal Integration**: Coming soon! The app will incorporate a fish recognition model using machine learning. Identify different fish species and deepen your understanding of marine life.
 
 ## ScreenShot
-![WhatsApp Image 2024-06-26 at 10 14 29 PM](https://github.com/Pankaj0405/Horizon/assets/91046820/ba97773a-512a-40c2-9242-fc36e6b59ea8)
-![WhatsApp Image 2024-06-26 at 10 14 30 PM](https://github.com/Pankaj0405/Horizon/assets/91046820/5ea46107-e55b-4c7c-bb18-d67822b180cc)
-![WhatsApp Image 2024-06-26 at 10 14 31 PM (1)](https://github.com/Pankaj0405/Horizon/assets/91046820/d397c69b-126d-465b-8527-9551e91075bb)
-![WhatsApp Image 2024-06-26 at 10 14 31 PM](https://github.com/Pankaj0405/Horizon/assets/91046820/3d18e6bd-be11-469a-a940-4e6c8e8d6639)
 
+<img src="https://github.com/Pankaj0405/Horizon/assets/91046820/ba97773a-512a-40c2-9242-fc36e6b59ea8" height="400" width="200">
+<img src="https://github.com/Pankaj0405/Horizon/assets/91046820/5ea46107-e55b-4c7c-bb18-d67822b180cc" height="400" width="200">
+<img src="https://github.com/Pankaj0405/Horizon/assets/91046820/d397c69b-126d-465b-8527-9551e91075bb" height="400" width="200">
+<img src="https://github.com/Pankaj0405/Horizon/assets/91046820/3d18e6bd-be11-469a-a940-4e6c8e8d6639" height="400" width="200">
 
 
 ## Technologies Used
