@@ -18,12 +18,17 @@ Horizon User App is a Flutter mobile application dedicated to marine life conser
 
 - **Fish Recognition Modal Integration**: Coming soon! The app will incorporate a fish recognition model using machine learning. Identify different fish species and deepen your understanding of marine life.
 
-## ScreenShot
+-  **Chatbot Assistance**: Utilize the chatbot for sustainability advice and user support, powered by the Gemini API.
+ 
+- **Image Recognition**: Upload images to receive detailed information about the content.
 
+## ScreenShot
 <img src="https://github.com/Pankaj0405/Horizon/assets/91046820/ba97773a-512a-40c2-9242-fc36e6b59ea8" height="400" width="200">
 <img src="https://github.com/Pankaj0405/Horizon/assets/91046820/5ea46107-e55b-4c7c-bb18-d67822b180cc" height="400" width="200">
 <img src="https://github.com/Pankaj0405/Horizon/assets/91046820/d397c69b-126d-465b-8527-9551e91075bb" height="400" width="200">
 <img src="https://github.com/Pankaj0405/Horizon/assets/91046820/3d18e6bd-be11-469a-a940-4e6c8e8d6639" height="400" width="200">
+<img src="https://github.com/Pankaj0405/Horizon/assets/91046820/63e3443f-d7ca-4bb4-8361-9ca56719de78" height="400" width="200">
+<img src="https://github.com/Pankaj0405/Horizon/assets/91046820/81923392-3c98-49ed-a3df-2754630cc521" height="400" width="200">
 
 
 ## Technologies Used
@@ -35,8 +40,7 @@ Horizon User App is a Flutter mobile application dedicated to marine life conser
 - **Firebase**: Firebase is employed for backend services, including authentication, database management, and storage.
 
 - **Machine Learning**: The app integrates machine learning for fish recognition, enhancing the user experience with educational features.
-- **Chatbot Assistance**: Utilize the chatbot for sustainability advice and user support, powered by the Gemini API.
-- **Image Recognition**: Upload images to receive detailed information about the content.
+
 
 
 ## Getting Started
